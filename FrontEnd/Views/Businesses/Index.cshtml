@@ -1,0 +1,14 @@
+<h1>All Businesses: </h1>
+
+@using FrontEnd.Models;
+<ol>
+@foreach (Business business in Model)
+{
+<ul>
+  <li>Name: @business.Name</li>
+  <li>Location: @business.City</li>
+</ul>
+<a href="/Businesses/Details/@(business.BusinessId)"><p>View Details</p></a>
+<br>
+}
+</ol>
