@@ -1,3 +1,4 @@
+using System; 
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc; 
@@ -18,7 +19,7 @@ namespace BusinessApi.Controllers
 
     //Get api/businesses - return businesses
     [HttpGet]
-    public ActionResult<IEnumerable<Business>> Get (string name, string type, string city, string description )
+    public ActionResult<IEnumerable<Business>> Get (string name, string type, string city, string description, bool random )
     {
       var query = _db.Businesses.AsQueryable();
       if (name != null)
@@ -37,6 +38,12 @@ namespace BusinessApi.Controllers
         {
         query = query.Where(entry => entry.Description == description);
         } 
+      if (random)
+      {
+        Random rdn = new Random();
+        int MaxId = _db.Businesses.Max(entry=>entry.BusinessId);
+        query = query.Where(entry=>entry.BusinessId == rdn.Next(MaxId));
+      }
       
       return query.ToList();
     }
