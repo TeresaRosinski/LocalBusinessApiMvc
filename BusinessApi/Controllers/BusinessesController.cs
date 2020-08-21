@@ -38,7 +38,7 @@ namespace BusinessApi.Controllers
         query = query.Where(entry => entry.Description == description);
         } 
       
-      return _db.Businesses.ToList();
+      return query.ToList();
     }
 
     //POst api/Businesses - create / post Businesses
