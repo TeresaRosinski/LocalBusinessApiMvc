@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc; 
 using BusinessApi.Models; 
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessApi.Controllers
 {
@@ -27,6 +28,22 @@ namespace BusinessApi.Controllers
     public void Post([FromBody] Business business)
     {
       _db.Businesses.Add(business);
+      _db.SaveChanges();
+    }
+
+    //Get api/Businesses/5
+    [HttpGet("{id}")]
+    public ActionResult<Business> Get (int id)
+    {
+      return _db.Businesses.FirstOrDefault(entry => entry.BusinessId == id);
+    }
+
+    //Put api/businesses/5
+    [HttpPut("{id}")]
+    public void Put (int id, [FromBody] Business business)
+    {
+      business.BusinessId = id; 
+      _db.Entry(business).State = EntityState.Modified;
       _db.SaveChanges();
     }
   }
