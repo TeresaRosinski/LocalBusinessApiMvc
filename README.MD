@@ -1,6 +1,6 @@
 <h1 align="center"><strong>Local Business API</strong></h1>
 
-<h4 align="center"><em>API and associated database to track local restaurants and stores</em></h4>
+<h4 align="center"><em>API and MVC application created to track local restaurants and stores</em></h4>
 
 
 ##### __Created:__ 8/21/2020
