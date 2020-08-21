@@ -18,8 +18,26 @@ namespace BusinessApi.Controllers
 
     //Get api/businesses - return businesses
     [HttpGet]
-    public ActionResult<IEnumerable<Business>> Get ()
+    public ActionResult<IEnumerable<Business>> Get (string name, string type, string city, string description )
     {
+      var query = _db.Businesses.AsQueryable();
+      if (name != null)
+        {
+          query = query.Where(entry => entry.Name == name);
+        } 
+      if (type != null)
+        {
+          query = query.Where(entry => entry.Type == type);
+        } 
+      if (city != null)
+        {
+          query = query.Where(entry => entry.City == city);
+        } 
+      if (description != null)
+        {
+        query = query.Where(entry => entry.Description == description);
+        } 
+      
       return _db.Businesses.ToList();
     }
 
